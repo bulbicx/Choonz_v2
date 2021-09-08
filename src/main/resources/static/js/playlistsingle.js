@@ -22,20 +22,41 @@
   }
 
   const loadDeleteTrack = async () => {
-    await fetch(`http://localhost:8082/tracks/read`)
-    .then(response => response.json())
-    .then(data => {
-      let selectDelete = document.querySelector(".track-list-dropdown-delete");
-      selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
-      
-      for (let i = 0; i < data.length; i++) {
-        let option = document.createElement("option");
-        option.setAttribute("value", data[i].id);
-        option.innerHTML = data[i].name;
-        selectDelete.appendChild(option);
-      }
+    await fetch(`http://localhost:8082/playlists/read/${myParam}`)
+      .then((response) => {
+          if (response.status !== 200) {
+              console.error(`status: ${reponse.status}`);
+              return;
+          }
+          return response.json() 
       })
-      .catch(error => console.error(error));
+      .then(data => {
+        let selectDelete = document.querySelector(".track-list-dropdown-delete");
+        selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
+        
+        for (let i = 0; i < data.tracks.length; i++) {
+          let option = document.createElement("option");
+          option.setAttribute("value", data.tracks[i].id);
+          option.innerHTML = data.tracks[i].name;
+          selectDelete.appendChild(option);
+        }
+        })
+      .catch((err) => console.error(`${ err }`));
+
+    // await fetch(`http://localhost:8082/tracks/read`)
+    // .then(response => response.json())
+    // .then(data => {
+    //   let selectDelete = document.querySelector(".track-list-dropdown-delete");
+    //   selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
+      
+    //   for (let i = 0; i < data.length; i++) {
+    //     let option = document.createElement("option");
+    //     option.setAttribute("value", data[i].id);
+    //     option.innerHTML = data[i].name;
+    //     selectDelete.appendChild(option);
+    //   }
+    //   })
+    //   .catch(error => console.error(error));
   }
   loadDeleteTrack();
 
