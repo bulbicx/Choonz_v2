@@ -72,7 +72,6 @@
     function createTrackPageHeader(track) {
         let albumArtistCol = document.querySelector("#album-artist-col");
         let trackCol = document.querySelector("#track-col");
-        console.log(track.album.cover)
         let albumImage = document.createElement("img");
         albumImage.setAttribute("class", "img-header card");
         albumImage.setAttribute("src", "data:image/" + track.album.cover.type + ";base64," + track.album.cover.picByte);
@@ -93,7 +92,7 @@
 
         let artistImage = document.createElement("img");
         artistImage.setAttribute("class", "img-artist-mini");
-        artistImage.setAttribute("src", "https://media.gq-magazine.co.uk/photos/5e830b92013fff000829dd01/master/w_1920,h_1280,c_limit/20200331-new-music-09.jpg");
+        artistImage.setAttribute("src", "data:image/" + track.album.artist.image.type + ";base64," + track.album.artist.image.picByte);
         artistImage.setAttribute("alt", "artist-image");
         artistImage.onclick = () => {
             getArtistPage(track.album.artist.id);
