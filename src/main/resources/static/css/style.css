@@ -252,13 +252,10 @@ footer {
   align-items: center;
 }
 
-
-.title-section-sgl-pg {
-  padding: .2em;
-}
 .title-section-sgl-genre,
 .title-section-sgl-pg {
-  font-size: 5.5rem;
+  font-size: 3.8rem;
+  margin: 0 0 .2em;
 }
 
 .description-genre {
@@ -267,7 +264,18 @@ footer {
 }
 
 .artist-name {
-  font-size: 2rem;
+  font-size: 1.1rem;
+  color: rgb(80, 77, 77);
+}
+
+.artist-name:hover,
+.artist-name:focus {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.album-text-container {
+  padding: 1em;
 }
 
 .row-track:hover,
