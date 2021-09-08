@@ -1,6 +1,7 @@
 (() => {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('id');
+    let artist;
 
     function getTrackPage(trackId) {
         fetch(`http://localhost:8082/track`)
@@ -49,18 +50,23 @@
         }
         tracksTableBody.appendChild(trackTableRow);
         
-        let trackTableHead = document.createElement("th");
-        trackTableHead.setAttribute("scope", "row");
+        let trackTableHead = document.createElement("td");
+        trackTableHead.setAttribute("class", "row-number");
         trackTableHead.textContent = rowNumber;
         trackTableRow.appendChild(trackTableHead);
 
         let trackNameTableData = document.createElement("td");
-        trackNameTableData.textContent = track.name;
         trackTableRow.appendChild(trackNameTableData);
 
-        let trackDurationTableData = document.createElement("td");
-        trackDurationTableData.textContent = track.duration;
-        trackTableRow.appendChild(trackDurationTableData);
+        let trackName = document.createElement("p");
+        trackName.setAttribute("class", "album-details album-artist");
+        trackName.textContent = track.name;
+        trackNameTableData.appendChild(trackName);
+
+        let trackArtist = document.createElement("p");
+        trackArtist.setAttribute("class", "album-details album-duration");
+        trackArtist.textContent = artist + " - " + track.duration;
+        trackNameTableData.appendChild(trackArtist);
     }
 
     function createAlbumHeader(album) {
@@ -85,6 +91,7 @@
 
         let artistName = document.createElement("h3");
         artistName.textContent = "by " + album.artist.name;
+        artist = album.artist.name;
         artistName.setAttribute("class", "artist-name");
         artistName.onclick=() => {
             getArtistPage(album.artist.id);

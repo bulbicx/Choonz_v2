@@ -278,6 +278,28 @@ footer {
   padding: 1em;
 }
 
+.album-details {
+  margin: 0;
+}
+
+.album-artist,
+.row-number {
+  font-weight: 700;
+}
+
+.album-duration {
+  color: rgb(94, 91, 91);
+}
+
+.table {
+  border: 1px solid black;
+}
+
+.row-number {
+  text-align: center;
+  padding-top: .8em;
+}
+
 .row-track:hover,
 .row-track:focus {
   cursor: pointer;
