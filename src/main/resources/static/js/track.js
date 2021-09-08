@@ -80,29 +80,23 @@
             getAlbumPage(track.album.id);
         }
         albumArtistCol.appendChild(albumImage);
+        
+        let albumTextContainer = document.createElement("div");
+        albumTextContainer.setAttribute("class", "album-text-container");
+        albumArtistCol.appendChild(albumTextContainer);
 
         let albumName = document.createElement("h1");
-        albumName.textContent = track.album.name;
+        albumName.textContent = track.name;
         albumName.setAttribute("class", "title-section-sgl-pg");
-        albumArtistCol.appendChild(albumName);
+        albumTextContainer.appendChild(albumName);
 
-        let trackAndArtistRow = document.createElement("div");
-        trackAndArtistRow.setAttribute("class", "track-info");
-        trackCol.appendChild(trackAndArtistRow);
-
-        let artistImage = document.createElement("img");
-        artistImage.setAttribute("class", "img-artist-mini");
-        artistImage.setAttribute("src", "data:image/" + track.album.artist.image.type + ";base64," + track.album.artist.image.picByte);
-        artistImage.setAttribute("alt", "artist-image");
-        artistImage.onclick = () => {
+        let artistName = document.createElement("h3");
+        artistName.textContent = "by " + track.album.artist.name;
+        artistName.setAttribute("class", "artist-name");
+        artistName.onclick=() => {
             getArtistPage(track.album.artist.id);
         }
-        trackAndArtistRow.appendChild(artistImage);
-
-        let trackAndArtistName = document.createElement("h1");
-        trackAndArtistName.textContent = track.album.artist.name + " - " + track.name;
-        trackAndArtistName.setAttribute("class", "artist-track-info");
-        trackAndArtistRow.appendChild(trackAndArtistName);
+        albumTextContainer.appendChild(artistName);
 
         let trackLyrics = document.createElement("p");
         trackLyrics.textContent = track.lyrics;
