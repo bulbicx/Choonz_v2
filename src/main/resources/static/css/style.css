@@ -308,6 +308,11 @@ footer {
   box-shadow:         inset 0 0 10px rgb(148, 148, 148);
 }
 
+.card-album:hover, 
+.card-album:focus {
+  cursor: pointer;
+}
+
 .text-section {
   margin-left: 2em;
   display: flex;

@@ -7,6 +7,7 @@
             .then(response => response.text())
             .then(pagelink => goToDynamicPage(pagelink, genreId));
     }
+
     function getAlbumPage(albumId){
         fetch(`http://localhost:8082/albumsingle`)
             .then(response => response.text())
@@ -43,27 +44,26 @@
     }
 
     function createArtistBodyAlbum(album, albumsTableBody, rowNumber){
-        console.log(album);
         let albumTableRow = document.createElement("tr");
         albumsTableBody.appendChild(albumTableRow);
         
-        let albumTableHead = document.createElement("th");
-        albumTableHead.setAttribute("scope", "row");
+        let albumTableHead = document.createElement("td");
         albumTableHead.textContent = rowNumber;
         albumTableRow.appendChild(albumTableHead);
 
         let albumCoverTableData = document.createElement("td");
+        albumTableRow.appendChild(albumCoverTableData);
+
         let albumCover = document.createElement("img");
-        //setAttribute("src", album.cover);
         albumCover.setAttribute("src", "data:image/" + album.cover.type + ";base64," + album.cover.picByte);
+        albumCover.setAttribute("alt", album.name);
         albumCover.setAttribute("width", 100);
         albumCover.setAttribute("height", 100);
-        albumCover.setAttribute("class", "card");
-        albumCoverTableData.append(albumCover);
-        albumTableRow.appendChild(albumCoverTableData);
+        albumCover.setAttribute("class", "card-album");
         albumCover.onclick=() => {
             getAlbumPage(album.id);
         }
+        albumCoverTableData.append(albumCover);
 
         let albumNameTableData = document.createElement("td");
         albumNameTableData.textContent = album.name;
