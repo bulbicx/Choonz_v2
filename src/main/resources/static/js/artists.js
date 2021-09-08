@@ -3,7 +3,6 @@
     searchInput.addEventListener("keyup", () => searchArtists());
 
     function searchArtists() {
-        console.log(searchInput.value)
         let txtValue;
         let filter = searchInput.value.toUpperCase();
         let card = document.getElementsByClassName("card-box");
@@ -46,12 +45,11 @@
             createArtistCard(artists[artist]);
         }
     }
+
     function createArtistCard(artist) {
         let cardGroup = document.querySelector("#card-group");
-
         let card = document.createElement("div");
         card.setAttribute("class", "card-box");
-        // card.setAttribute("style", "width:12rem");
         card.onclick = () => {
             getArtistSinglePage(artist.id);
         }
@@ -71,15 +69,6 @@
         titleCard.setAttribute("class", "title-card");
         titleCard.innerText = artist.name;
         imageOverlay.appendChild(titleCard);
-
-        // let cardBody = document.createElement("div");
-        // cardBody.setAttribute("class", "card-body");
-        // card.appendChild(cardBody);
-
-        // let cardBodyText = document.createElement("div");
-        // cardBodyText.setAttribute("class", "text-playlist-card");
-        // cardBodyText.textContent = artist.name;
-        // cardBody.appendChild(cardBodyText);
     }
 }
 )();
