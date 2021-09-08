@@ -99,7 +99,7 @@
       span.setAttribute("class", "img-container");
       span.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
       let img = document.createElement("img");
-      img.setAttribute("src", "https://www.superiorwallpapers.com/download/relaxing-place-for-a-special-summer-holiday-tropical-island-4028x2835.jpg");
+      img.setAttribute("src", "https://cdn.pixabay.com/photo/2015/08/10/21/26/vinyl-883199_960_720.png");
       img.setAttribute("class", "card-img-top card-background");
       img.setAttribute("alt", tracks[i].name);
       span.appendChild(img);

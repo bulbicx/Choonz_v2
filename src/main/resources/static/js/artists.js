@@ -38,7 +38,7 @@
         let cardImage = document.createElement("img");
         cardImage.setAttribute("class", "card-img-top");
         cardImage.setAttribute("alt", "artist image");
-        cardImage.setAttribute("src", "https://media.gq-magazine.co.uk/photos/5e830b92013fff000829dd01/master/w_1920,h_1280,c_limit/20200331-new-music-09.jpg");
+        cardImage.setAttribute("src", "data:image/" + artist.image.type + ";base64," + artist.image.picByte);
         card.appendChild(cardImage);
 
         let cardBody = document.createElement("div");
