@@ -97,24 +97,32 @@
 
     for (let i = 0; i < tracks.length; i++) {
       let card = document.createElement("div");
-      card.setAttribute("class", "card p-0");
-      card.setAttribute("style", "width: 13rem");
+      card.setAttribute("class", "card-box");
+      card.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
       section.appendChild(card);
   
-      let span = document.createElement("span");
-      span.setAttribute("class", "img-container");
-      span.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
+      // let span = document.createElement("span");
+      // span.setAttribute("class", "img-container");
       let img = document.createElement("img");
       img.setAttribute("src", "https://cdn.pixabay.com/photo/2015/08/10/21/26/vinyl-883199_960_720.png");
       img.setAttribute("class", "card-img-top card-background");
       img.setAttribute("alt", tracks[i].name);
-      span.appendChild(img);
+      card.appendChild(img);
       
-      let p = document.createElement("p");
-      p.setAttribute("class", "card-text text");
-      p.innerText = tracks[i].name;
-      span.appendChild(p);
-      card.appendChild(span);
+      // let p = document.createElement("p");
+      // p.setAttribute("class", "card-text text");
+      // p.innerText = tracks[i].name;
+      // span.appendChild(p);
+      // card.appendChild(span);
+
+      let imageOverlay = document.createElement("div");
+      imageOverlay.setAttribute("class", "image_overlay");
+      card.appendChild(imageOverlay);
+
+      let titleCard = document.createElement("p");
+      titleCard.setAttribute("class", "title-card");
+      titleCard.innerText = tracks[i].name;
+      imageOverlay.appendChild(titleCard);
     }
   }
 
