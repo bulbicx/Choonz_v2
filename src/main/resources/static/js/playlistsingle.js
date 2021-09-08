@@ -42,21 +42,6 @@
         }
         })
       .catch((err) => console.error(`${ err }`));
-
-    // await fetch(`http://localhost:8082/tracks/read`)
-    // .then(response => response.json())
-    // .then(data => {
-    //   let selectDelete = document.querySelector(".track-list-dropdown-delete");
-    //   selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
-      
-    //   for (let i = 0; i < data.length; i++) {
-    //     let option = document.createElement("option");
-    //     option.setAttribute("value", data[i].id);
-    //     option.innerHTML = data[i].name;
-    //     selectDelete.appendChild(option);
-    //   }
-    //   })
-    //   .catch(error => console.error(error));
   }
   loadDeleteTrack();
 
@@ -152,18 +137,41 @@
   }
   fetchPlaylistSingle();
 
+  const addTracksOnDropdown = (existingTracks) => {
+    fetch(`http://localhost:8082/playlists/read/${myParam}`)
+      .then((response) => {
+        if (response.status !== 200) {
+            console.error(`status: ${reponse.status}`);
+            return;
+        }
+        return response.json() 
+      })
+      .then(data => {
+        let select = document.querySelector(".track-list-dropdown");
+        for (let z = 0; z < existingTracks.length; z++) {
+          let isOnPlaylist = false;
+          for (let i = 0; i < data.tracks.length; i++) {
+            if (existingTracks[z].name === data.tracks[i].name) {
+              isOnPlaylist = true;
+            }
+  
+          }
+          if (!isOnPlaylist) {
+            let option = document.createElement("option");
+            option.setAttribute("value", existingTracks[z].id);
+            option.innerHTML = existingTracks[z].name;
+            select.appendChild(option);
+            isOnPlaylist = false;
+          }
+        }
+      })
+      .catch((err) => console.error(`${ err }`));
+  }
+
   const getAllTracks = async () => {
     await fetch(`http://localhost:8082/tracks/read`)
     .then(response => response.json())
-      .then(data => {
-        let select = document.querySelector(".track-list-dropdown");
-        for (let i = 0; i < data.length; i++) {
-          let option = document.createElement("option");
-          option.setAttribute("value", data[i].id);
-          option.innerHTML = data[i].name;
-          select.appendChild(option);
-        }
-    })
+    .then(tracks => addTracksOnDropdown(tracks))
     .catch(error => console.error(error));
   }
   getAllTracks();
