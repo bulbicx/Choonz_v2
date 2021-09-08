@@ -52,15 +52,15 @@ public class AlbumController {
         return new ResponseEntity<AlbumDTO>(this.service.read(id), HttpStatus.OK);
     }
     
-    @PutMapping("/{albumId}/addTrack/{trackId}")
-	public ResponseEntity<AlbumDTO> addTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
-		return new ResponseEntity<AlbumDTO>(this.service.addTrack(albumId, trackId), HttpStatus.ACCEPTED);
-	}
-
-	@PutMapping("/{albumId}/removeTrack/{trackId}")
-	public ResponseEntity<AlbumDTO> removeTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
-		return new ResponseEntity<AlbumDTO>(this.service.removeTrack(albumId, trackId), HttpStatus.ACCEPTED);
-	}
+//    @PutMapping("/{albumId}/addTrack/{trackId}")
+//	public ResponseEntity<AlbumDTO> addTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
+//		return new ResponseEntity<AlbumDTO>(this.service.addTrack(albumId, trackId), HttpStatus.ACCEPTED);
+//	}
+//
+//	@PutMapping("/{albumId}/removeTrack/{trackId}")
+//	public ResponseEntity<AlbumDTO> removeTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
+//		return new ResponseEntity<AlbumDTO>(this.service.removeTrack(albumId, trackId), HttpStatus.ACCEPTED);
+//	}
 
     @PutMapping("/update/{id}/{artistId}/{genreId}")
     public ResponseEntity<AlbumDTO> update(@RequestBody Album album, @PathVariable Long id, @PathVariable (value="artistId") Long artistId,
