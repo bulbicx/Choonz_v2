@@ -1,6 +1,7 @@
 (() => {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('id');
+    let artist;
 
     function getTrackPage(trackId) {
         fetch(`http://localhost:8082/track`)
@@ -42,7 +43,6 @@
     }
 
     function createTrackRow(track, tracksTableBody, rowNumber){
-        console.log(track);
         let trackTableRow = document.createElement("tr");
         trackTableRow.setAttribute("class", "row-track");
         trackTableRow.onclick = () => {
@@ -50,51 +50,52 @@
         }
         tracksTableBody.appendChild(trackTableRow);
         
-        let trackTableHead = document.createElement("th");
-        trackTableHead.setAttribute("scope", "row");
+        let trackTableHead = document.createElement("td");
+        trackTableHead.setAttribute("class", "row-number");
         trackTableHead.textContent = rowNumber;
         trackTableRow.appendChild(trackTableHead);
 
         let trackNameTableData = document.createElement("td");
-        trackNameTableData.textContent = track.name;
         trackTableRow.appendChild(trackNameTableData);
 
-        let trackDurationTableData = document.createElement("td");
-        trackDurationTableData.textContent = track.duration;
-        trackTableRow.appendChild(trackDurationTableData);
+        let trackName = document.createElement("p");
+        trackName.setAttribute("class", "album-details album-artist");
+        trackName.textContent = track.name;
+        trackNameTableData.appendChild(trackName);
+
+        let trackArtist = document.createElement("p");
+        trackArtist.setAttribute("class", "album-details album-duration");
+        trackArtist.textContent = artist + " - " + track.duration;
+        trackNameTableData.appendChild(trackArtist);
     }
 
     function createAlbumHeader(album) {
         let albumCol = document.querySelector("#album-col");
-        let artistCol = document.querySelector("#artist-col");
         
         let albumImage = document.createElement("img");
         albumImage.setAttribute("class", "img-header");
-        
         albumImage.setAttribute("src", "data:image/" + album.cover.type + ";base64," + album.cover.picByte);
         albumImage.setAttribute("alt", "image");
         albumImage.setAttribute("width", 192);
         albumImage.setAttribute("height", 192);
         albumCol.appendChild(albumImage);
+
+        let albumTextContainer = document.createElement("div");
+        albumTextContainer.setAttribute("class", "album-text-container");
+        albumCol.appendChild(albumTextContainer);
+
         let albumName = document.createElement("h1");
         albumName.textContent = album.name;
         albumName.setAttribute("class", "title-section-sgl-pg");
-        albumCol.appendChild(albumName);
-        
-        let artistImage = document.createElement("img");
-        artistImage.setAttribute("class", "img-header");
-        artistImage.setAttribute("src", "https://media.gq-magazine.co.uk/photos/5e830b92013fff000829dd01/master/w_1920,h_1280,c_limit/20200331-new-music-09.jpg");
-        artistImage.setAttribute("alt", "image");
-        artistImage.setAttribute("width", 192);
-        artistImage.setAttribute("height", 192);
-        artistImage.setAttribute("class", "card");
-        artistImage.onclick=() => {
+        albumTextContainer.appendChild(albumName);
+
+        let artistName = document.createElement("h3");
+        artistName.textContent = "by " + album.artist.name;
+        artist = album.artist.name;
+        artistName.setAttribute("class", "artist-name");
+        artistName.onclick=() => {
             getArtistPage(album.artist.id);
         }
-        artistCol.appendChild(artistImage);
-        let artistName = document.createElement("h1");
-        artistName.textContent = album.artist.name;
-        artistName.setAttribute("class", "artist-name");
-        artistCol.appendChild(artistName);
+        albumTextContainer.appendChild(artistName);
     }
 })();

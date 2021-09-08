@@ -72,7 +72,6 @@
     function createTrackPageHeader(track) {
         let albumArtistCol = document.querySelector("#album-artist-col");
         let trackCol = document.querySelector("#track-col");
-        console.log(track.album.cover)
         let albumImage = document.createElement("img");
         albumImage.setAttribute("class", "img-header card");
         albumImage.setAttribute("src", "data:image/" + track.album.cover.type + ";base64," + track.album.cover.picByte);
@@ -81,29 +80,23 @@
             getAlbumPage(track.album.id);
         }
         albumArtistCol.appendChild(albumImage);
+        
+        let albumTextContainer = document.createElement("div");
+        albumTextContainer.setAttribute("class", "album-text-container");
+        albumArtistCol.appendChild(albumTextContainer);
 
         let albumName = document.createElement("h1");
-        albumName.textContent = track.album.name;
+        albumName.textContent = track.name;
         albumName.setAttribute("class", "title-section-sgl-pg");
-        albumArtistCol.appendChild(albumName);
+        albumTextContainer.appendChild(albumName);
 
-        let trackAndArtistRow = document.createElement("div");
-        trackAndArtistRow.setAttribute("class", "track-info");
-        trackCol.appendChild(trackAndArtistRow);
-
-        let artistImage = document.createElement("img");
-        artistImage.setAttribute("class", "img-artist-mini");
-        artistImage.setAttribute("src", "https://media.gq-magazine.co.uk/photos/5e830b92013fff000829dd01/master/w_1920,h_1280,c_limit/20200331-new-music-09.jpg");
-        artistImage.setAttribute("alt", "artist-image");
-        artistImage.onclick = () => {
+        let artistName = document.createElement("h3");
+        artistName.textContent = "by " + track.album.artist.name;
+        artistName.setAttribute("class", "artist-name");
+        artistName.onclick=() => {
             getArtistPage(track.album.artist.id);
         }
-        trackAndArtistRow.appendChild(artistImage);
-
-        let trackAndArtistName = document.createElement("h1");
-        trackAndArtistName.textContent = track.album.artist.name + " - " + track.name;
-        trackAndArtistName.setAttribute("class", "artist-track-info");
-        trackAndArtistRow.appendChild(trackAndArtistName);
+        albumTextContainer.appendChild(artistName);
 
         let trackLyrics = document.createElement("p");
         trackLyrics.textContent = track.lyrics;

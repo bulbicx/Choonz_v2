@@ -22,20 +22,26 @@
   }
 
   const loadDeleteTrack = async () => {
-    await fetch(`http://localhost:8082/tracks/read`)
-    .then(response => response.json())
-    .then(data => {
-      let selectDelete = document.querySelector(".track-list-dropdown-delete");
-      selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
-      
-      for (let i = 0; i < data.length; i++) {
-        let option = document.createElement("option");
-        option.setAttribute("value", data[i].id);
-        option.innerHTML = data[i].name;
-        selectDelete.appendChild(option);
-      }
+    await fetch(`http://localhost:8082/playlists/read/${myParam}`)
+      .then((response) => {
+          if (response.status !== 200) {
+              console.error(`status: ${reponse.status}`);
+              return;
+          }
+          return response.json() 
       })
-      .catch(error => console.error(error));
+      .then(data => {
+        let selectDelete = document.querySelector(".track-list-dropdown-delete");
+        selectDelete.addEventListener("change", () => getPlaylistIdDropdown());
+        
+        for (let i = 0; i < data.tracks.length; i++) {
+          let option = document.createElement("option");
+          option.setAttribute("value", data.tracks[i].id);
+          option.innerHTML = data.tracks[i].name;
+          selectDelete.appendChild(option);
+        }
+        })
+      .catch((err) => console.error(`${ err }`));
   }
   loadDeleteTrack();
 
@@ -91,24 +97,24 @@
 
     for (let i = 0; i < tracks.length; i++) {
       let card = document.createElement("div");
-      card.setAttribute("class", "card p-0");
-      card.setAttribute("style", "width: 13rem");
+      card.setAttribute("class", "card-box");
+      card.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
       section.appendChild(card);
   
-      let span = document.createElement("span");
-      span.setAttribute("class", "img-container");
-      span.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
       let img = document.createElement("img");
-      img.setAttribute("src", "https://www.superiorwallpapers.com/download/relaxing-place-for-a-special-summer-holiday-tropical-island-4028x2835.jpg");
+      img.setAttribute("src", "https://cdn.pixabay.com/photo/2015/08/10/21/26/vinyl-883199_960_720.png");
       img.setAttribute("class", "card-img-top card-background");
       img.setAttribute("alt", tracks[i].name);
-      span.appendChild(img);
-      
-      let p = document.createElement("p");
-      p.setAttribute("class", "card-text text");
-      p.innerText = tracks[i].name;
-      span.appendChild(p);
-      card.appendChild(span);
+      card.appendChild(img);
+
+      let imageOverlay = document.createElement("div");
+      imageOverlay.setAttribute("class", "image_overlay");
+      card.appendChild(imageOverlay);
+
+      let titleCard = document.createElement("p");
+      titleCard.setAttribute("class", "title-card");
+      titleCard.innerText = tracks[i].name;
+      imageOverlay.appendChild(titleCard);
     }
   }
 
@@ -131,18 +137,41 @@
   }
   fetchPlaylistSingle();
 
+  const addTracksOnDropdown = (existingTracks) => {
+    fetch(`http://localhost:8082/playlists/read/${myParam}`)
+      .then((response) => {
+        if (response.status !== 200) {
+            console.error(`status: ${reponse.status}`);
+            return;
+        }
+        return response.json() 
+      })
+      .then(data => {
+        let select = document.querySelector(".track-list-dropdown");
+        for (let z = 0; z < existingTracks.length; z++) {
+          let isOnPlaylist = false;
+          for (let i = 0; i < data.tracks.length; i++) {
+            if (existingTracks[z].name === data.tracks[i].name) {
+              isOnPlaylist = true;
+            }
+  
+          }
+          if (!isOnPlaylist) {
+            let option = document.createElement("option");
+            option.setAttribute("value", existingTracks[z].id);
+            option.innerHTML = existingTracks[z].name;
+            select.appendChild(option);
+            isOnPlaylist = false;
+          }
+        }
+      })
+      .catch((err) => console.error(`${ err }`));
+  }
+
   const getAllTracks = async () => {
     await fetch(`http://localhost:8082/tracks/read`)
     .then(response => response.json())
-      .then(data => {
-        let select = document.querySelector(".track-list-dropdown");
-        for (let i = 0; i < data.length; i++) {
-          let option = document.createElement("option");
-          option.setAttribute("value", data[i].id);
-          option.innerHTML = data[i].name;
-          select.appendChild(option);
-        }
-    })
+    .then(tracks => addTracksOnDropdown(tracks))
     .catch(error => console.error(error));
   }
   getAllTracks();

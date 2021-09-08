@@ -1,11 +1,5 @@
 (() => {
-  let groupSection = document.querySelector(".group-section");
-  // let addPlaylistBtn = document.querySelector(".add");
-  // let updatePlaylistBtn = document.querySelector(".update");
-  // let deletePlaylistBtn = document.querySelector(".delete");
-  // let playlistId;
-
-  //Build request to just limit query result on 5
+  let cardGroup;
 
   // Playlist
   const getAllPlaylists = async () => {
@@ -16,44 +10,14 @@
   }
   getAllPlaylists();
 
-  //This method is used to retrieve a single playlist
-  //and output it on form data to edit it
-  // const fetchPlaylistSingle = (id, action) => {
-  //   fetch(`http://localhost:8082/playlists/read/${id}`)
-  //     .then((response) => {
-  //         if (response.status !== 200) {
-  //             console.error(`status: ${reponse.status}`);
-  //             return;
-  //         }
-  //         return response.json() 
-  //     })
-  //     .then(data => {
-  //       if (action === "put") {
-  //         insertDataOnForm(data)
-  //       } else if (action === "delete") {
-  //         playlistId = id;
-  //       }
-  //     })
-  //     .catch((err) => console.error(`${ err }`));
-  // }
-
-  //this method is used to retrieve playlists and put them
-  //into a dropdown when editing a playlist
-  // const getListPlaylist = (action) => {
-  //   fetch(`http://localhost:8082/playlists/read`)
-  //   .then(response => response.json())
-  //   .then(data =>  loadPlaylistOnDropdown(data, action))
-  //   .catch(error => console.error(error));
-  // }
-
   const goToPlaylistSinglePage = (data, playlistId) => {
     window.location = `${data}?id=${playlistId}`;
   }
 
   const getPlaylistSinglePage = (playlistId) => {
     fetch(`http://localhost:8082/playlistsingle`)
-            .then(response => response.text())
-            .then(data => goToPlaylistSinglePage(data, playlistId));
+      .then(response => response.text())
+      .then(data => goToPlaylistSinglePage(data, playlistId));
   }
 
   // Albums
@@ -71,8 +35,8 @@
 
   const getAlbumSinglePage = (albumId) => {
     fetch(`http://localhost:8082/albumsingle`)
-            .then(response => response.text())
-            .then(data => goToAlbumSinglePage(data, albumId));
+      .then(response => response.text())
+      .then(data => goToAlbumSinglePage(data, albumId));
   }
 
   // Tracks
@@ -132,10 +96,6 @@
       .then(data => goToGenreSinglePage(data, genreId));
   }
 
-  const getSectionTitle = (sectionType) => {
-    return sectionType + " for you";
-  }
-
   const getActionType = (sectionName, data) => {
     if (sectionName === "Playlist") {
       getPlaylistSinglePage(data.id);
@@ -179,206 +139,66 @@
       .then(window.location = `artists.html`);
   }
 
-  // const retrieveAddFormDetails = () => {
-  //   let playlistName = document.querySelector("#new-name").value;
-  //   let description = document.querySelector("#new-description").value;
-  //   let userId = document.querySelector("#new-user").value;
-  //   let artworkImg = document.querySelector("#new-artwork").value;
-  //   let playlist = {
-  //     artwork: artworkImg,
-  //     description: description,
-  //     name: playlistName
-  //   }
-    
-  //   postPlaylist(playlist, userId);
-  // }
+  const createCards = (data, sectionType, cardGroup) => {
+    for (let i = 0; i < data.length; i++) {
+      let cardBox = document.createElement("div");
+      cardBox.setAttribute("class", `card-box card-${sectionType.toLowerCase()}-${data[i].id}`);
+      cardGroup.appendChild(cardBox);
+      let img = document.createElement("img");
+      img.setAttribute("class", "card-img-top");
 
-  // const retrieveEditFormDetails = () => {
-  //   let playlistName = document.querySelector("#name").value;
-  //   let description = document.querySelector("#description").value;
-  //   let artworkImg = document.querySelector("#artwork").value;
-  //   let playlistId = document.querySelector("#playlist-list-update").value;
-
-  //   let playlist = {
-  //     artwork: artworkImg,
-  //     description: description,
-  //     name: playlistName
-  //   }
-    
-  //   updatePlaylist(playlist, playlistId);
-  // }
-
-  
-  // const getPlaylistIdDropdown = (action) => {
-  //   let id = document.querySelector("#playlist-list-update").value;
-  //   fetchPlaylistSingle(id, action);
-  // }
-
-  // const getPlaylistIdDropdownDelete = (action) => {
-  //   let playlistId = document.querySelector("#playlist-list-delete").value;
-  //   fetchPlaylistSingle(playlistId, action);
-  // }
-  
-  // const insertDataOnForm = (data) => {
-  //   let name = document.querySelector("#name");
-  //   let description = document.querySelector("#description");
-  //   let artwork = document.querySelector("#artwork");
-
-  //   name.value = data.name;
-  //   description.value = data.description;
-  //   artwork.value = data.artwork;
-  // }
-
-  // const loadPlaylistOnDropdown = (data, action) => {
-  //   let modalBody;
-  //   let select = document.createElement("select");
-  //   select.setAttribute("class", "form-select");
-  //   if (action === "put") {
-  //     modalBody = document.querySelector(".dropdown-list-update");
-  //     select.setAttribute("id", "playlist-list-update");
-  //     select.addEventListener("change", () => getPlaylistIdDropdown(action));
-
-  //   } else if (action === "delete") {
-  //     modalBody = document.querySelector(".dropdown-list-delete");
-  //     select.setAttribute("id", "playlist-list-delete");
-  //     select.addEventListener("change", () => getPlaylistIdDropdownDelete(action));
-  //   }
-    
-  //   modalBody.appendChild(select);
-  //   let option = document.createElement("option");
-  //   option.setAttribute("value", "");
-  //   option.innerHTML = "--Select an option--";
-  //   select.appendChild(option);
-
-  //   for (let i = 0; i < data.length; i++) {
-  //     let option = document.createElement("option");
-  //     option.setAttribute("value", data[i].id);
-  //     option.innerHTML = data[i].name;
-  //     select.appendChild(option);
-  //   }
-  // }
-
-  // const deletePlaylist = async (playlistId) => {
-    
-  //   await fetch(`http://localhost:8082/playlists/delete/${ playlistId }`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error(error));
-  //   // window.location.reload(true);
-  //   location.reload();
-  // }
-
-  // const postPlaylist = async (playlist, userId) => {
-  //   await fetch(`http://localhost:8082/playlists/create/user/${ userId }`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify(playlist)
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error(error));
-  //   // window.location.reload(true);
-  //   location.reload();
-  // }
-
-  // const updatePlaylist = async (playlist, playlistId) => {
-  //   await fetch(`http://localhost:8082/playlists/update/${ playlistId }`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify(playlist)
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.error(error));
-  //     location.reload();
-  // }
-
-  const displaySection = (data, sectionType) => {
-    let homeSection = document.createElement("div");
-    homeSection.setAttribute("class", "row home-section");
-    groupSection.appendChild(homeSection);
-
-    let sectionHeader = document.createElement("div");
-    sectionHeader.setAttribute("class", "section-header");
-    homeSection.appendChild(sectionHeader);
-
-    let titleHomeSection = document.createElement("h4");
-    titleHomeSection.setAttribute("class", `title-home-section ${sectionType.toLowerCase()}`);
-    titleHomeSection.innerText = getSectionTitle(sectionType);
-    sectionHeader.appendChild(titleHomeSection);
-
-    //&& localStorage.getItem("session-token") !== null
-    let iconSection = document.createElement("span");
-    iconSection.setAttribute("class", "icon-section")
-    sectionHeader.appendChild(iconSection);
-    let seeMoreIcon = document.createElement("i");
-    seeMoreIcon.setAttribute("class", "bi bi-eye-fill");
-    if (sectionType.toLowerCase() === "playlist") {
-      seeMoreIcon.addEventListener("click", () => goToPlaylistsPage());
-    } else if (sectionType.toLowerCase() === "artists") {
-      seeMoreIcon.addEventListener("click", () => goToArtistsPage());
-    } else if (sectionType.toLowerCase() === "genres") {
-      seeMoreIcon.addEventListener("click", () => goToGenresPage());
-    } else if (sectionType.toLowerCase() === "albums") {
-      seeMoreIcon.addEventListener("click", () => goToAlbumsPage());
-    }
-    
-    if (sectionType.toLowerCase() !== "tracks") {
-      iconSection.appendChild(seeMoreIcon);
-    }
-    
-    if (data.length > 0) {
-      let cardGroup = document.createElement("div");
-      cardGroup.setAttribute("class", "row");
-      cardGroup.setAttribute("id", "card-group");
-      homeSection.appendChild(cardGroup);
-      for (let i = 0; i < data.length; i++) {
-
-        let cardBox = document.createElement("div");
-        cardBox.setAttribute("class", "card-box");
-        cardGroup.appendChild(cardBox);
-
-        let card = document.createElement("div");
-        card.setAttribute("class", `card card-${sectionType.toLowerCase()}-${data[i].id}`);
-        cardBox.appendChild(card);
-
-        let img = document.createElement("img");
-        img.setAttribute("class", "card-img-top");
+      if (sectionType.toLowerCase() === "playlist") {
+        img.setAttribute("src", "data:image/" + data[i].artwork.type + ";base64," + data[i].artwork.picByte);
+      } else if (sectionType.toLowerCase() === "artists") {
+        img.setAttribute("src", "data:image/" + data[i].image.type + ";base64," + data[i].image.picByte);
+      } else if (sectionType.toLowerCase() === "genres") {
+        img.setAttribute("src", "data:image/" + data[i].image.type + ";base64," + data[i].image.picByte);
+      } else if (sectionType.toLowerCase() === "albums") {
+        img.setAttribute("src", "data:image/" + data[i].cover.type + ";base64," + data[i].cover.picByte);
+      } else if (sectionType.toLowerCase() === "tracks") {
         img.setAttribute("src", "https://cdn.pixabay.com/photo/2015/08/10/21/26/vinyl-883199_960_720.png");
-        img.setAttribute("alt", "cover " + data[i].id);
-        card.appendChild(img);
+      }
 
-        let titleCardSection = document.createElement("div") 
-        titleCardSection.setAttribute("class", "title-section");
-        cardBox.appendChild(titleCardSection);
+      img.setAttribute("alt", "cover " + data[i].id);
+      cardBox.appendChild(img);
 
-        let titleCard = document.createElement("p");
-        titleCard.setAttribute("class", "title-card");
-        titleCard.innerText = data[i].name;
-        titleCardSection.appendChild(titleCard);
+      let imageOverlay = document.createElement("div");
+      imageOverlay.setAttribute("class", "image_overlay");
+      cardBox.appendChild(imageOverlay);
 
-        card.addEventListener("click", () => getActionType(sectionType, data[i]));
-        }
-    } else {
-      let pText = document.createElement("p");
-      pText.setAttribute("class", "no-data-found");
-      let noTextFound = `:( There are no ${ sectionType.toLowerCase() } yet!`;
-      pText.innerHTML = noTextFound;
-      homeSection.appendChild(pText);
-    } 
+      let titleCard = document.createElement("p");
+      titleCard.setAttribute("class", "title-card");
+      titleCard.innerText = data[i].name;
+      imageOverlay.appendChild(titleCard);
+
+      cardBox.addEventListener("click", () => getActionType(sectionType, data[i]));
+    }
   }
 
-  // addPlaylistBtn.addEventListener("click", () => retrieveAddFormDetails());
-  // updatePlaylistBtn.addEventListener("click", () => retrieveEditFormDetails());
-  // deletePlaylistBtn.addEventListener("click", () => deletePlaylist(playlistId));
+  const displaySection = (data, sectionType) => {
+    let playlistEyeIcon = document.querySelector(".playlist-eye");
+    let artistEyeIcon = document.querySelector(".artist-eye");
+    let genreEyeIcon = document.querySelector(".genre-eye");
+    let albumEyeIcon = document.querySelector(".album-eye");
+    playlistEyeIcon.addEventListener("click", () => goToPlaylistsPage());
+    artistEyeIcon.addEventListener("click", () => goToArtistsPage());
+    genreEyeIcon.addEventListener("click", () => goToGenresPage());
+    albumEyeIcon.addEventListener("click", () => goToAlbumsPage());
+    
+    if (data.length > 0) {
+      if (sectionType.toLowerCase() === "playlist") {
+        cardGroup = document.querySelector("#playlist-cards");
+      } else if (sectionType.toLowerCase() === "artists") {
+        cardGroup = document.querySelector("#artist-cards");
+      } else if (sectionType.toLowerCase() === "genres") {
+        cardGroup = document.querySelector("#genre-cards");
+      } else if (sectionType.toLowerCase() === "albums") {
+        cardGroup = document.querySelector("#album-cards");
+      } else if (sectionType.toLowerCase() === "tracks") {
+        cardGroup = document.querySelector("#track-cards");
+      }
+      createCards(data, sectionType, cardGroup)
+    }
+  }
 
 })();

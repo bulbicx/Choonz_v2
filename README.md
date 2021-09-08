@@ -1,16 +1,31 @@
-# Choonz Final Project
+# Choonz v2
 
-Choonz is a Music Library Web Application that we have been tasked to create for the final project of our SDET course. The project aims to be able to sign in users based on 
-differing levels of authority and each user can then CRUD different entities depending on their authentication. This is a full stack application using MySQL for the database, Spring-Boot 
-framework for the Backend and a combination of HTML, CSS and JavaScript for the Frontend.
+Choonz version 2 contains improvements from the [original](https://github.com/bulbicx/SDET-finalproj-team3) group project. It is a Music Library Web Application that it has been tasked to create for the final project of the SDET course. 
+The project aims at viewing different artists, albums, genres, tracks and playlists. Registered users are able to create, update and delete a playlist. Authenticated admins are able do any of the CRUD functionality for artists, albums, genres and tracks. 
+The purpose of this project was not only to demonstrate abilities at creating a full stack web application from scratch, but to also at demonstrating abilities to different type of testing.
+In particular the application has been tested with Unit testing, Integration testing, User Acceptance testing and non-functional testing.
+This application uses MySQL as data storage, Spring-Boot framework for the Backend and a combination of HTML, CSS and JavaScript for the Frontend. Testing makes use of selenium web driver, cucumber and jmeter.
 
-## Concept
+## Original Work
 
-The Choonz website allows a vistor to read all of the entities, allows logged in users to CRUD their own playlists and an admin user to CRUD all the entities.
+The Choonz website allows a visitor to read all of the entities. It allows logged in users to CRUD their own playlists and an admin user to CRUD all the entities.
+Although the original project was working under all aspects, there were some little adjustments and fixes to make, which for the time frame we were given, they
+could not have been applied to the original project.
 
-- MUST HAVE - Track, Artist, Album
-- SHOULD HAVE - Genre, Playlist
-- COULD HAVE - Login system with different authentication depending on type of user
+## Improved Work
+
+The Choonz v2 has been improved under various aspects. In particular:
+
+- Login and Signup have been redesigned
+- Playlist detail page had fixes:
+    - add track - dropdown list takes all available tracks but not the already added tracks on playlist(originally also tracks inside the playlist were shown).
+    - remove a track - dropdown list displays only tracks from the list(originally all existing tracks were displayed)
+- Cards with details have been redesigned with a new hover effect
+- Artist page now takes uploaded image(originally was static as uploaded image was not working)
+- Home page now displays cover images for playlists, genres, artists, tracks and albums(originally cover images had static URL image)
+- Search function has been added to Artist, Album, Playlist and Genre pages so it is easier for the user to find what they are looking for.
+- Testing coverage improvements(originally it was set at 72%)
+- All testing succeed(originally there were some tests that failed due to last minute changes on the front-end) 
 
 ### Client Requirements
 
@@ -43,17 +58,16 @@ The Choonz website allows a vistor to read all of the entities, allows logged in
 - A user can CRUD as many playlists as they like on their home screen
 - Users should CRUD their own playlists either by song id, name, or genre
 #### Non-Functional Testing
-- Response times should be <10 milliseconds
-- Latency should be <2 seconds at 10000 concurrent users 
-- Throughput rate should be >300/s 
+- Response times should be < 10 milliseconds
+- Latency should be < 2 seconds at 10000 concurrent users 
+- Throughput rate should be > 300/s 
 - RAM allocation should be minimal, with few (if any) memory leaks
 - The application should be spike-, load-, stress-, and soak-tested
- 
 
 ## Prerequisites:
 
 To use this application you will need:
-- Java Verison 11
+- Java Verison 11 (or newer)
 - Eclipse or IntelliJ IDE installed
 - MySQL Server 8.0+
 - Visual Studio Code
@@ -68,12 +82,12 @@ Given that you achieve the prerequisites, to set up development you will need to
 1. Clone this repository into an IDE of your choice, preferably Eclipse.
 2. Convert the project into a Maven Project (optional depending on how you cloned the repository).
 3. Run the project as a Spring Boot Application.
-4. The application is hosted as 'localhost:8082/' OR can be run as a live server from the index page using Visual Studio Code.
+4. The application is hosted as 'localhost:8082/' OR can be run as a live server from any HTML page using Visual Studio Code.
 
 ## Running the Tests
 
-The tests can be ran the IDE, on Eclipsen this can be done by right-clicking on the project and running as a JUnit test. If certain User Acceptance Tests are needed to be ran individually, tags are available in features, which can be added to the cucumber runner so that only that specific test is ran.
-Non-functional testing is covered in the src/test/resouces/jmeter. The .jmx files can be opened and ran inside JMeter.
+The tests can be run on Eclipse, this can be done by right-clicking on the project and running it as a JUnit test. User Acceptance Tests can be run individually by using tags or run them all without their use (Default).
+Non-functional testing is covered in the **src/test/resouces/jmeter**. The .jmx files can be opened and ran inside JMeter.
 
 ## Test Coverage
 
@@ -92,14 +106,13 @@ Non-functional testing is covered in the src/test/resouces/jmeter. The .jmx file
 - [**Vinesh Ghela**](https://github.com/vineshghela)
 - [**Piers Barber**](https://github.com/PCMBarber)
 
-### Development Team
+### Original Development Team
 
-- Team 3
-- **Scrum Master** - [**Leaf Cooper**](https://github.com/leaf-cooper-qa)
+- [**Leaf Cooper**](https://github.com/leaf-cooper-qa)
 - [**Marco Castellana**](https://github.com/bulbicx)
 - [**Niall Duggan**](https://github.com/nduggan-dev)
 - [**David Indiongco**](https://github.com/dindiongco) 
 
-## Acknowledgements
+### Improvements Development Team
 
-TBD
+- [**Marco Castellana**](https://github.com/bulbicx)

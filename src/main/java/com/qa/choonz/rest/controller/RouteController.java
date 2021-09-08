@@ -95,4 +95,9 @@ public class RouteController {
     public String trackCrud() {
         return "trackCrud.html";
     }
+    
+    @GetMapping(value = "/login")
+    public String login() {
+    	return "login.html";
+    }
 }

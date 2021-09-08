@@ -1,5 +1,24 @@
 
 (() => {
+    let searchInput = document.querySelector("#searchInput");
+    searchInput.addEventListener("keyup", () => searchAlbums());
+
+    function searchAlbums() {
+        let txtValue;
+        let filter = searchInput.value.toUpperCase();
+        let card = document.getElementsByClassName("card-box");
+
+        for (let i = 0; i < card.length; i++) {
+            let p = card[i].getElementsByClassName("title-card")[0];
+            txtValue = p.textContent || p.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                card[i].style.display = "";
+            } else {
+                card[i].style.display = "none";
+            }
+        }
+    }
+
     function getAlbumSinglePage(albumId) {
         fetch(`http://localhost:8082/albumsingle`)
                 .then(response => response.text())
@@ -25,30 +44,30 @@
             createAlbumCard(albums[album]);
         }
     }
+    
     function createAlbumCard(album) {
         let cardGroup = document.querySelector("#card-group");
-
         let card = document.createElement("div");
-        card.setAttribute("class", "card mb-3");
-        card.setAttribute("style", "width:12rem;");
+        card.setAttribute("class", "card-box");
         card.onclick = () => {
             getAlbumSinglePage(album.id);
         }
         cardGroup.appendChild(card);
+
         let cardImage = document.createElement("img");
         cardImage.setAttribute("class", "card-img-top");
         cardImage.setAttribute("src", "data:image/" + album.cover.type + ";base64," + album.cover.picByte);
         cardImage.setAttribute("alt", album.cover.name);
         card.appendChild(cardImage);
 
-        let cardBody = document.createElement("div");
-        cardBody.setAttribute("class", "card-body");
-        card.appendChild(cardBody);
+        let imageOverlay = document.createElement("div");
+        imageOverlay.setAttribute("class", "image_overlay");
+        card.appendChild(imageOverlay);
 
-        let cardBodyText = document.createElement("div");
-        cardBodyText.setAttribute("class", "text-playlist-card");
-        cardBodyText.textContent = album.name;
-        cardBody.appendChild(cardBodyText);
+        let titleCard = document.createElement("p");
+        titleCard.setAttribute("class", "title-card");
+        titleCard.innerText = album.name;
+        imageOverlay.appendChild(titleCard);
     }
 }
 )();
