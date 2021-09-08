@@ -101,19 +101,11 @@
       card.addEventListener("click", () => getTrackSinglePage(tracks[i].id));
       section.appendChild(card);
   
-      // let span = document.createElement("span");
-      // span.setAttribute("class", "img-container");
       let img = document.createElement("img");
       img.setAttribute("src", "https://cdn.pixabay.com/photo/2015/08/10/21/26/vinyl-883199_960_720.png");
       img.setAttribute("class", "card-img-top card-background");
       img.setAttribute("alt", tracks[i].name);
       card.appendChild(img);
-      
-      // let p = document.createElement("p");
-      // p.setAttribute("class", "card-text text");
-      // p.innerText = tracks[i].name;
-      // span.appendChild(p);
-      // card.appendChild(span);
 
       let imageOverlay = document.createElement("div");
       imageOverlay.setAttribute("class", "image_overlay");
