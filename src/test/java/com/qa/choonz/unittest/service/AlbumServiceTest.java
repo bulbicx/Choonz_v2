@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.persistence.domain.Artist;
@@ -67,20 +68,21 @@ public class AlbumServiceTest {
 	private AlbumDTO albumWithTrackDTO = new AlbumDTO(0L, "album name",  tracklist, artist, genre, image);
 	
 	
-//	@Test
-//	public void AlbumCreateTest() {
-//		
-//		Mockito.when(this.repo.save(album)).thenReturn(album);
-//		Mockito.when(this.artistRepo.findById(0L)).thenReturn(optionalArtist);
-//		Mockito.when(this.genreRepo.findById(0L)).thenReturn(optionalGenre);
-//		Mockito.when(this.imageRepo.save(image)).thenReturn(image);
-//		
-//		assertThat(albumDTO).isEqualTo(this.service.create(album, 0L, 0L));
-//		
-//		Mockito.verify(this.repo, Mockito.times(1)).save(album);
-//		Mockito.verify(this.artistRepo, Mockito.times(1)).findById(0L);
-//		Mockito.verify(this.genreRepo, Mockito.times(1)).findById(0L);
-//	}
+	@Test
+	public void AlbumCreateTest() {
+		
+		Mockito.when(this.repo.save(album)).thenReturn(album);
+		Mockito.when(this.artistRepo.findById(0L)).thenReturn(optionalArtist);
+		Mockito.when(this.genreRepo.findById(0L)).thenReturn(optionalGenre);
+		Mockito.when(this.imageRepo.save(image)).thenReturn(image);
+//		Long artistId, Long genreId, MultipartFile file, String name, String token
+		String token = "$31$11$eTW7By3kk0_UdPsmwrFWvyLLKwtEGDd-tVnSgrIJQ4Q";
+		assertThat(albumDTO).isEqualTo(this.service.create(0L, 0L, new ArrayList<>(), "album name", token));
+		
+		Mockito.verify(this.repo, Mockito.times(1)).save(album);
+		Mockito.verify(this.artistRepo, Mockito.times(1)).findById(0L);
+		Mockito.verify(this.genreRepo, Mockito.times(1)).findById(0L);
+	}
 	
 	@Test
 	public void AlbumReadAllTest() {
