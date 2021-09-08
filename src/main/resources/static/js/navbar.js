@@ -66,11 +66,19 @@
   if (myStorage.getItem("session-token")) {
     toggleLoginLogout();
   }
+
+  const gotToLoginPage = () => {
+    fetch(`http://localhost:8082/login`)
+        .then(response => response.text())
+        .then(pagelink => window.location = `login.html`);
+  }
+
   navLogout.onclick = () => {
     deleteToken(myStorage.getItem("session-token"));
     myStorage.removeItem("id");
     toggleLoginLogout();
-    location.reload();
+    gotToLoginPage();
+    // location.reload();
   }
 
   if (window.location.href.includes("artists")) {

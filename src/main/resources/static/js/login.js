@@ -7,6 +7,7 @@
     const signupFormError = document.querySelector("#error-message");
     const pageHeader = document.querySelector("#header");
     let loginSignupForm = false;
+
     const loginUser = async (loginInfo) => {
         await fetch(`http://localhost:8082/sessions/authenticate/public`, {
             method: "POST",
@@ -103,7 +104,7 @@
         if(loginSignupForm) {
             loginSignupSwitchLabel.textContent = "Not a member?";
             loginSignupSwitch.textContent = "Sign up";
-            pageHeader.textContent = "Log in to Choonz";
+            pageHeader.textContent = "Sign in";
         } else {
             loginSignupSwitchLabel.textContent = "Already a member?"; 
             loginSignupSwitch.textContent = "Log in";
