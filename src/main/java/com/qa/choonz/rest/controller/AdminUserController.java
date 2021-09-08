@@ -54,7 +54,7 @@ public class AdminUserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<AdminUserDTO> update(@RequestBody AdminUser user, @PathVariable long id) {
+    public ResponseEntity<AdminUserDTO> update(@RequestBody AdminUser user, @PathVariable Long id) {
         return new ResponseEntity<AdminUserDTO>(this.service.update(user, id), HttpStatus.ACCEPTED);
     }
 
