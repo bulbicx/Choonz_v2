@@ -2,9 +2,11 @@ package com.qa.choonz.uat.stepdefs;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.qa.choonz.uat.hooks.SeleniumHooks;
@@ -24,6 +26,7 @@ public class AlbumStepDefs {
 	private ScreenshotUtility screenshotUtils;
 	private AlbumsPage albumsPage;
 	private AlbumSinglePage singlePage;
+	List<WebElement> albumTitleCards;
 	
 	public AlbumStepDefs(SeleniumHooks hooks) {
 		this.driver = hooks.getDriver();
@@ -36,7 +39,7 @@ public class AlbumStepDefs {
 	
 	@Given("I am on the albums page")
 	public void iAmOnTheAlbumsPage() {
-		this.driver.get("http://localhost:8082/albums.html");
+		this.driver.get(this.albumsPage.url);
 
 	}
 
@@ -46,9 +49,8 @@ public class AlbumStepDefs {
 	}
 
 	@Then("I am taken to the page for that album")
-	public void iAmTakenToThePageForThatAlbum() throws InterruptedException {
-		Thread.sleep(500);
-		assertEquals("http://localhost:8082/albumsingle.html?id=1",this.driver.getCurrentUrl());
+	public void iAmTakenToThePageForThatAlbum() {
+		assertEquals("Choonz - Album details", this.driver.getTitle());
 	}
 
 	@Given("I am on the album page with id {int}")
@@ -58,18 +60,22 @@ public class AlbumStepDefs {
 
 	@When("I click on the name of the first track")
 	public void iClickOnTheNameOfTheFirstTrack() {
-		singlePage.clickTrackName();
+		singlePage.clickFirstTrack();
 	}
 
 	@Then("I am taken to the page for that track")
-	public void iAmTakenToThePageForThatTrack() throws InterruptedException {
-		Thread.sleep(500);
-		assertEquals("http://localhost:8082/track.html?id=1",this.driver.getCurrentUrl());
+	public void iAmTakenToThePageForThatTrack() {
+		assertEquals("Choonz - Track", this.driver.getTitle());
+	}
+	
+	@When("I click on the artist name")
+	public void i_click_on_the_artist_name() {
+	    singlePage.clickArtistLink();
 	}
 
-	@When("I click on the duration of the first track")
-	public void iClickOnTheDurationOfTheFirstTrack() {
-		singlePage.clickTrackDuration();
+	@Then("I am taken to the artist page")
+	public void i_am_taken_to_the_artist_page() {
+	    assertEquals("Choonz - Artist details", this.driver.getTitle());
 	}
 	
 	@AfterStep
