@@ -16,7 +16,7 @@ public class ArtistDomainTest {
 	
 	@Test
 	public void ArtistTest() {
-		assertThat("Artist [id=0, name=artist name, albums=[], cover="+image.toString()+"]").isEqualTo(artist.toString());
+		assertThat("Artist [id=0, name=artist name, albums=[], image="+image.toString()+"]").isEqualTo(artist.toString());
 		
 	}
 

@@ -66,27 +66,27 @@ public class Image {
        this.picByte = picByte;
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(picByte);
-		result = prime * result + Objects.hash(id, name, type);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Image other = (Image) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Arrays.equals(picByte, other.picByte)
-				&& Objects.equals(type, other.type);
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + Arrays.hashCode(picByte);
+//		result = prime * result + Objects.hash(id, name, type);
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Image other = (Image) obj;
+//		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Arrays.equals(picByte, other.picByte)
+//				&& Objects.equals(type, other.type);
+//	}
 
 	@Override
 	public String toString() {

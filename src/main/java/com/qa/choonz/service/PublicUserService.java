@@ -58,11 +58,7 @@ public class PublicUserService {
 		toUpdate.setPassword(hashPass.hash(pass));
 		toUpdate.setPlaylists(user.getPlaylists());
 		
-		System.out.println(toUpdate);
-		
 		PublicUser updated = this.repo.save(toUpdate);
-		
-		System.out.println(updated);
 		
 		return this.mapToDTO(updated);
 
