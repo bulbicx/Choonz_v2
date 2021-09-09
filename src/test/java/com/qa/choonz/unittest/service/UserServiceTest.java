@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,6 +22,7 @@ public class UserServiceTest {
 	
 	@MockBean
 	private PublicUserRepository repo;
+
 	
 	@Autowired
 	private PublicUserService service;
@@ -64,7 +66,6 @@ public class UserServiceTest {
 	public void UserUpdateTest() {
 		Mockito.when(this.repo.findById(0L)).thenReturn(optionalUser);
 		Mockito.when(this.repo.save(newUser)).thenReturn(newUser);
-		
 		assertThat(newUserDTO).isEqualTo(this.service.update(newUser, 0L));
 		
 		Mockito.verify(this.repo, Mockito.times(1)).findById(0L);

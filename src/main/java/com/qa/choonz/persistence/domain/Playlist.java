@@ -125,10 +125,10 @@ public class Playlist {
 				+ ", tracks=" + tracks + ", user=" + user + "]";
 	}
 
-    @Override
-	public int hashCode() {
-		return Objects.hash(artwork, description, id, name, tracks, user);
-	}
+//    @Override
+//	public int hashCode() {
+//		return Objects.hash(artwork, description, id, name, tracks, user);
+//	}
 
     @Override
 	public boolean equals(Object obj) {

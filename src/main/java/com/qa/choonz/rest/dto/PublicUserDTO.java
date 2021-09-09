@@ -53,15 +53,5 @@ public class PublicUserDTO extends UserDTO{
 		return "PublicUserDTO [playlists=" + playlists + ", getId()=" + getId() + ", getUsername()=" + getUsername()
 				+ ", getName()=" + getName() + "]";
 	}
-
-	
-
-	
-	
-	
-
-
-	
-	
 	
 }

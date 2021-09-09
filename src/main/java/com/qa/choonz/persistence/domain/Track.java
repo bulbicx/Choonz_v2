@@ -140,10 +140,10 @@ public class Track {
         return builder.toString();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(album, duration, id, lyrics, name, playlists);
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(album, duration, id, lyrics, name, playlists);
+//    }
 
     @Override
     public boolean equals(Object obj) {

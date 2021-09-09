@@ -1,8 +1,8 @@
-@navpages
+@playlist_links
 Feature: playlists page
   I want to use this template for my feature file
 
-  Scenario: Link test
+  Scenario: Test link playlist card 
     Given I am on the playlists page
     When I click on the card to the first playlist
     Then I am taken to the page for that playlist

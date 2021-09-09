@@ -1,23 +1,19 @@
-@navpages
+@artist
 Feature: Artists page
-  I want to use this template for my feature file
+  As a user, I want to click on links that works,
+  so that I can navigate the application easily
 
-  Scenario: Link test
+  Scenario: Test link artist card
     Given I am on the artists page
     When I click on the card to the first artist
     Then I am taken to the page for that artist
 
-	Scenario: Cover Link test
+	Scenario: Test link cover album
 		Given I am on the artist page with id 1
 		When I click on the cover of the first album
 		Then I am taken to the page for that album
-
-  Scenario: Name Link test
-		Given I am on the artist page with id 1
-		When I click on the name of the first album
-		Then I am taken to the page for that album
 		
-	Scenario: Genre Link test
+	Scenario: Test link genre
 		Given I am on the artist page with id 1
 		When I click on the genre of the first album
 		Then I am taken to the page for that genre

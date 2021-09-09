@@ -3,7 +3,6 @@ package com.qa.choonz.rest.dto;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.persistence.domain.Image;
 
@@ -17,7 +16,6 @@ public class GenreDTO {
 
     public GenreDTO() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public GenreDTO(Long id, String name, String description, List<Album> albums) {
@@ -26,6 +24,15 @@ public class GenreDTO {
         this.name = name;
         this.description = description;
         this.albums = albums;
+    }
+    
+    public GenreDTO(Long id, String name, String description, List<Album> albums, Image image) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.albums = albums;
+        this.image = image;
     }
 
     public long getId() {
@@ -67,11 +74,6 @@ public class GenreDTO {
 
 	public void setImage(Image image) {
 		this.image = image;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(albums, description, id, image, name);
 	}
 
 	@Override

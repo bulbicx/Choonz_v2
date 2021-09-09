@@ -20,7 +20,6 @@ public class AlbumDTO {
 
     public AlbumDTO() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public AlbumDTO(long id, String name, List<Track> tracks, Artist artist, Genre genre, Image cover) {
@@ -88,11 +87,6 @@ public class AlbumDTO {
                 .append(", artist=").append(artist).append(", genre=").append(genre).append(", cover=").append(cover)
                 .append("]");
         return builder.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(artist, cover, genre, id, name, tracks);
     }
 
     @Override

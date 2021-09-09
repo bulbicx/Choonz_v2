@@ -2,11 +2,12 @@ package com.qa.choonz.uat.stepdefs;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,8 +46,12 @@ public class ReadHomeSectionsStepDefs {
 	}
 
 	@Then("I can click onto one album")
-	public void i_can_click_onto_one_album() {
-		homePage.clickAlbumCard();
+	public void i_can_click_onto_one_album() throws InterruptedException {
+		WebElement element = driver.findElement(By.className("card-albums-1"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 1100)", "");
+		TimeUnit.SECONDS.sleep(1);
+		element.click();
 	}
 
 	@Then("I will be redirected to the album detail page")
@@ -61,52 +66,55 @@ public class ReadHomeSectionsStepDefs {
 	 */
 	@When("I see the artists section")
 	public void i_see_the_artists_section() {
-		String titleSection = "Artists for you";
-		assertEquals(titleSection, homePage.getArtistSectionTitle());
+		String title = "Artists for you";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 500)", "");
+		assertEquals(title, homePage.getArtistSectionTitle());
 	}
 
 	@Then("I can click onto one artist")
-	public void i_can_click_onto_one_artist() {
-		WebElement element = homePage.getArtistCard();
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).click().perform();
+	public void i_can_click_onto_one_artist() throws InterruptedException {
+		WebElement element = driver.findElement(By.className("card-artists-1"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 700)", "");
+		TimeUnit.SECONDS.sleep(1);
+		element.click();
 	}
 
 	@Then("I will be redirected to the artist detail page")
 	public void i_will_be_redirected_to_the_artist_detail_page() {
-		String titleArtistDetailPage = "Choonz - Artist details";
-		assertEquals(titleArtistDetailPage, this.driver.getTitle());
+		String title = "Choonz - Artist details";
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.titleContains(title));
+		assertEquals(title, this.driver.getTitle());
 	}
 
 	/**
 	 * Genre section 
 	 * From file(read_genre_home.feature)
+	 * @throws InterruptedException 
 	 */
 	@When("I see the genres section")
 	public void i_see_the_genres_section() {
-		WebElement element = homePage.getGenreCard();
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).perform();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 1000)", "");
 		String titleSection = "Genres for you";
 		assertEquals(titleSection, homePage.getGenreSectionTitle());
 	}
 
 	@Then("I can click onto one genre")
-	public void i_can_click_onto_one_genre() {
-		// move to footer so element becomes visible by driver
-		WebElement footer = driver.findElement(By.id("sub-catch-phrase"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView();", footer);
+	public void i_can_click_onto_one_genre() throws InterruptedException {		
 		WebElement element = homePage.getGenreCard();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 1000)", "");
+		TimeUnit.SECONDS.sleep(1);
 		element.click();
 	}
 
 	@Then("I will be redirected to the genre detail page")
 	public void i_will_be_redirected_to_the_genre_detail_page() {
 		String title = "Choonz - Genre details";
-		WebDriverWait wait = new WebDriverWait(driver, 3);
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.titleContains(title));
 
 		assertEquals(title, this.driver.getTitle());
@@ -118,20 +126,18 @@ public class ReadHomeSectionsStepDefs {
 	 */
 	@When("I see the tracks section")
 	public void i_see_the_tracks_section() {
-		WebElement element = homePage.getTrackCard();
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).perform();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 1300)", "");
 		String titleSection = "Tracks for you";
 		assertEquals(titleSection, homePage.getTrackSectionTitle());
 	}
 
 	@Then("I can click onto one track")
-	public void i_can_click_onto_one_track() {
-		// move to footer so element becomes visible by driver
-		WebElement footer = driver.findElement(By.id("sub-catch-phrase"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView();", footer);
+	public void i_can_click_onto_one_track() throws InterruptedException {
 		WebElement element = homePage.getTrackCard();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 1300)", "");
+		TimeUnit.SECONDS.sleep(1);
 		element.click();
 	}
 
@@ -150,20 +156,31 @@ public class ReadHomeSectionsStepDefs {
 	 */
 	@When("I see the playlists section")
 	public void i_see_the_playlists_section() {
-		WebElement element = homePage.getPlaylistCard();
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).perform();
+//		WebElement element = homePage.getPlaylistCard();
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(element).perform();
+//		String titleSection = "Playlist for you";
+//		assertEquals(titleSection, homePage.getPlaylistSectionTitle());
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 600)", "");
 		String titleSection = "Playlist for you";
 		assertEquals(titleSection, homePage.getPlaylistSectionTitle());
 	}
 
 	@Then("I can click onto one playlist")
-	public void i_can_click_onto_one_playlist() {
-		// move to footer so element becomes visible by driver
-		WebElement footer = driver.findElement(By.id("sub-catch-phrase"));
+	public void i_can_click_onto_one_playlist() throws InterruptedException {
+//		// move to footer so element becomes visible by driver
+//		WebElement footer = driver.findElement(By.id("sub-catch-phrase"));
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("arguments[0].scrollIntoView();", footer);
+//		WebElement element = homePage.getPlaylistCard();
+//		element.click();
+		
+		WebElement element = driver.findElement(By.className("card-playlist-1"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView();", footer);
-		WebElement element = homePage.getPlaylistCard();
+		js.executeScript("window.scrollBy(0, 600)", "");
+		TimeUnit.SECONDS.sleep(1);
 		element.click();
 	}
 

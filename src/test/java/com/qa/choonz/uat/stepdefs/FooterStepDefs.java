@@ -2,32 +2,23 @@ package com.qa.choonz.uat.stepdefs;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.qa.choonz.uat.hooks.SeleniumHooks;
 import com.qa.choonz.uat.pages.GenresPage;
-import com.qa.choonz.utils.ScreenshotUtility;
 
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class FooterStepDefs {
 	
 	private WebDriver driver;
-	private ScreenshotUtility screenshotUtils;
 	private GenresPage page;
 	
 	public FooterStepDefs(SeleniumHooks hooks) {
 		this.driver = hooks.getDriver();
-		screenshotUtils = new ScreenshotUtility();
 		this.page = PageFactory.initElements(driver, GenresPage.class);
-		this.driver.manage().window().maximize();
-		this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 	
 	@When("I click on the footer home button")
@@ -84,14 +75,6 @@ public class FooterStepDefs {
 	@Then("I am taken to instagram")
 	public void iAmTakenToInstagram() {
 		assertEquals("https://www.instagram.com/",this.driver.getCurrentUrl());
-	}
-	
-	@AfterStep
-	public void takeScreenshotAfterStep(Scenario scenario) {
-		this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		if (scenario.isFailed()) {
-			scenario.attach(screenshotUtils.takeScreenshot(driver), "image/png", scenario.getName());
-		}
 	}
 
 }

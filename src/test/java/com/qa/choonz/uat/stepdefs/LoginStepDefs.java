@@ -2,11 +2,10 @@ package com.qa.choonz.uat.stepdefs;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.choonz.uat.hooks.SeleniumHooks;
 import com.qa.choonz.uat.pages.LoginPage;
@@ -23,8 +22,6 @@ public class LoginStepDefs {
 	public LoginStepDefs(SeleniumHooks hooks) {
 		this.driver = hooks.getDriver();
 		this.page = PageFactory.initElements(driver, LoginPage.class);
-		this.driver.manage().window().maximize();
-		this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 	
 	@Given("I am on the login page")
@@ -34,12 +31,12 @@ public class LoginStepDefs {
 
 	@When("I enter my username")
 	public void iEnterMyUsername() {
-		page.enterUsername("bigred");
+		page.enterUsername("something");
 	}
 
 	@When("I enter my password")
 	public void iEnterMyPassword() {
-		page.enterPassword("newpass");
+		page.enterPassword("password123");
 	}
 
 	@When("I click log in")
@@ -48,8 +45,9 @@ public class LoginStepDefs {
 	}
 
 	@Then("I become logged in")
-	public void iBecomeLoggedIn() throws InterruptedException {
-		Thread.sleep(500);
+	public void iBecomeLoggedIn() {
+	    WebDriverWait wait = new WebDriverWait(driver, 10);
+	    wait.until(ExpectedConditions.urlContains("http://localhost:8082/index.html"));
 		assertEquals("http://localhost:8082/index.html", this.driver.getCurrentUrl());
 	}
 
@@ -84,8 +82,10 @@ public class LoginStepDefs {
 	}
 
 	@Then("I become signed up")
-	public void iBecomeSignedUp() throws InterruptedException {
-		Thread.sleep(500);
+	public void iBecomeSignedUp() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+	    wait.until(ExpectedConditions.urlContains("http://localhost:8082/index.html"));
+		
 		assertEquals("http://localhost:8082/index.html", this.driver.getCurrentUrl());
 	}
 
@@ -106,8 +106,9 @@ public class LoginStepDefs {
 
 	@Then("I am told I have the wrong credentials")
 	public void iAmToldIHaveTheWrongCredentials() {
-		Alert alert = driver.switchTo().alert();
-		alert.accept();
+	    WebDriverWait wait = new WebDriverWait(driver, 10);
+	    wait.until(ExpectedConditions.alertIsPresent());
+		this.driver.switchTo().alert().accept();;
 	}
 
 	@When("I enter the wrong username")

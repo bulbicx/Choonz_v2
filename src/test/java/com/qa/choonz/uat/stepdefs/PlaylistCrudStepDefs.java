@@ -124,7 +124,7 @@ public class PlaylistCrudStepDefs {
 
 	@When("I update playlist details")
 	public void i_update_playlist_details() {
-		playlistPage.updateData("Update playlist", "Updated desc", "Update artwork");
+		playlistPage.updateData("Update playlist", "Updated desc");
 	}
 
 	@When("I press the update playlist button")

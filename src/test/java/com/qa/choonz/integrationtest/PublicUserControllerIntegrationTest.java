@@ -68,6 +68,9 @@ public class PublicUserControllerIntegrationTest {
 		// Create User object
 		PublicUser user = new PublicUserBuilder().id(1L).name("Micheal").username("polkadot")
 						.build();
+		
+		PublicUser user2 = new PublicUserBuilder().id(2L).name("Micheal").username("polkadot")
+				.build();
 		// Artist
 		Artist artist = new Artist(1L, "Jack Montano", new ArrayList<>(), image);
 		// Genre
@@ -94,10 +97,12 @@ public class PublicUserControllerIntegrationTest {
 
 		//Add playlist to user
 		user.setPlaylists(playlistsOnDb);
+		user2.setPlaylists(new ArrayList<>());
 		
 		// Create a list and add the object
 		List<PublicUser> usersOnDb = new ArrayList<>();
 		usersOnDb.add(user);
+		usersOnDb.add(user2);
 
 		// Convert list into JSON format
 		String usersOnDbAsJSON = this.mapper.writeValueAsString(usersOnDb);

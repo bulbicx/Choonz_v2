@@ -28,10 +28,10 @@ public class GenreServiceTest {
 	
 	private Image image = new Image(0L, "image name", "image type", null);
 	private Genre genre = new Genre(0L, "genre name", "genre desc", new ArrayList<>(), image);
-	private GenreDTO genreDTO = new GenreDTO(0L, "genre name", "genre desc", new ArrayList<>());
+	private GenreDTO genreDTO = new GenreDTO(0L, "genre name", "genre desc", new ArrayList<>(), image);
 	private Optional<Genre> optionalGenre = Optional.of(new Genre(0L, "genre name", "genre desc", new ArrayList<>(), image));
 	private Genre newGenre = new Genre(0L, "new genre name", "new genre desc", new ArrayList<>(), image);
-	private GenreDTO newGenreDTO = new GenreDTO(0L, "new genre name", "new genre desc", new ArrayList<>());
+	private GenreDTO newGenreDTO = new GenreDTO(0L, "new genre name", "new genre desc", new ArrayList<>(), image);
 	
 	
 //	@Test
@@ -49,7 +49,7 @@ public class GenreServiceTest {
 		
 		Mockito.when(this.repo.findAll()).thenReturn(new ArrayList<>());
 		
-		assertThat(new ArrayList<>()).isEqualTo(this.service.read());
+		assertThat(this.service.read()).isEqualTo(new ArrayList<>());
 		
 		Mockito.verify(this.repo, Mockito.times(1)).findAll();
 	}
@@ -58,7 +58,7 @@ public class GenreServiceTest {
 	public void GenreReadByIdTest() {
 		Mockito.when(this.repo.findById(0L)).thenReturn(optionalGenre);
 		
-		assertThat(genreDTO).isEqualTo(this.service.read(0L));
+		assertThat(this.service.read(0L)).isEqualTo(genreDTO);
 		
 		Mockito.verify(this.repo, Mockito.times(1)).findById(0L);
 	}
@@ -68,7 +68,7 @@ public class GenreServiceTest {
 		Mockito.when(this.repo.findById(0L)).thenReturn(optionalGenre);
 		Mockito.when(this.repo.save(newGenre)).thenReturn(newGenre);
 		
-		assertThat(newGenreDTO).isEqualTo(this.service.update(newGenre, 0L));
+		assertThat(this.service.update(newGenre, 0L)).isEqualTo(newGenreDTO);
 		
 		Mockito.verify(this.repo, Mockito.times(1)).findById(0L);
 		Mockito.verify(this.repo, Mockito.times(1)).save(newGenre);
