@@ -1,15 +1,9 @@
 package com.qa.choonz.rest.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.datasource.embedded.ConnectionProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,15 +52,15 @@ public class AlbumController {
         return new ResponseEntity<AlbumDTO>(this.service.read(id), HttpStatus.OK);
     }
     
-    @PutMapping("/{albumId}/addTrack/{trackId}")
-	public ResponseEntity<AlbumDTO> addTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
-		return new ResponseEntity<AlbumDTO>(this.service.addTrack(albumId, trackId), HttpStatus.ACCEPTED);
-	}
-
-	@PutMapping("/{albumId}/removeTrack/{trackId}")
-	public ResponseEntity<AlbumDTO> removeTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
-		return new ResponseEntity<AlbumDTO>(this.service.removeTrack(albumId, trackId), HttpStatus.ACCEPTED);
-	}
+//    @PutMapping("/{albumId}/addTrack/{trackId}")
+//	public ResponseEntity<AlbumDTO> addTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
+//		return new ResponseEntity<AlbumDTO>(this.service.addTrack(albumId, trackId), HttpStatus.ACCEPTED);
+//	}
+//
+//	@PutMapping("/{albumId}/removeTrack/{trackId}")
+//	public ResponseEntity<AlbumDTO> removeTrack(@PathVariable Long albumId, @PathVariable Long trackId) {
+//		return new ResponseEntity<AlbumDTO>(this.service.removeTrack(albumId, trackId), HttpStatus.ACCEPTED);
+//	}
 
     @PutMapping("/update/{id}/{artistId}/{genreId}")
     public ResponseEntity<AlbumDTO> update(@RequestBody Album album, @PathVariable Long id, @PathVariable (value="artistId") Long artistId,

@@ -40,7 +40,7 @@ body {
   -webkit-box-shadow: inset 0px 0px 10px 1px #17253d;
   box-shadow:         inset 0px 0px 10px 1px #17253d;
   padding: 1em;
-  height: 14em;
+  min-height: 14em;
   width: 100%;
   display: flex;
   flex-wrap: wrap;

@@ -1,6 +1,7 @@
-@navpages
+@navlinks
 Feature: Header feature
-  I want to use this template for my feature file
+  As a user, I want to navigate through pages by using links in the navbar, 
+  so that i can navigate through pages.
 
   Scenario: Header Home Link
     Given I am on the home page
@@ -28,8 +29,7 @@ Feature: Header feature
 		Then I am taken to the genres page
 	
 	Scenario: Header Login Test
-	Given I am on the home page
-	When I click on the header login button
-	Then I am taken to the login page
+		Given I am on the home page
+		When I click on the header login button
+		Then I am taken to the login page
 		
-#Also need test for login and profile, once those pages are implemented

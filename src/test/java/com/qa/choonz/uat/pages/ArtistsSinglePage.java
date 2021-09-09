@@ -1,31 +1,27 @@
 package com.qa.choonz.uat.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 public class ArtistsSinglePage {
-	
+
 	public final String url = "http://localhost:8082/artistsingle.html?id=1";
-	
-	@FindBy(xpath="//*[@id=\"album-table-body\"]/tr/td[1]/img")
-	public WebElement firstAlbumCover;
-	
-	@FindBy(xpath="//*[@id=\"album-table-body\"]/tr/td[2]")
-	public WebElement firstAlbumName;
-	
-	@FindBy(xpath="//*[@id=\"album-table-body\"]/tr/td[3]")
-	public WebElement firstAlbumGenre;
-	
-	public void clickAlbumCover() {
-		firstAlbumCover.click();
+
+	@FindBys({ @FindBy(className = "card-album") })
+	private List<WebElement> coverAlbums;
+
+	@FindBy(xpath = "//*[@id=\"album-table-body\"]/tr/td[4]")
+	private WebElement genre;
+
+	public void clickFirstAlbumCover() {
+		this.coverAlbums.get(0).click();
 	}
-	
-	public void clickAlbumName() {
-		firstAlbumName.click();
-	}
-	
+
 	public void clickGenreName() {
-		firstAlbumGenre.click();
+		this.genre.click();
 	}
 
 }

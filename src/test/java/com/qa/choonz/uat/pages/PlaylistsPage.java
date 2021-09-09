@@ -115,10 +115,9 @@ public class PlaylistsPage {
 		this.playlistListDeleteSelect.selectByVisibleText(playlist);		
 	}
 
-	public void updateData(String name, String desc, String artwork) {
+	public void updateData(String name, String desc) {
 		this.updateName.sendKeys(name);
 		this.updateDescription.sendKeys(desc);
-		this.updateArtwork.sendKeys(artwork);
 	}
 	
 	public WebElement getSelectPlaylistElement() {

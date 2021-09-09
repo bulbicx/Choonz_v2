@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.choonz.persistence.domain.AdminUser;
 import com.qa.choonz.persistence.domain.PublicUser;
-import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.rest.dto.SessionDTO;
 import com.qa.choonz.service.SessionService;
 

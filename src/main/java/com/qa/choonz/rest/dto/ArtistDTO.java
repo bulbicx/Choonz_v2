@@ -17,7 +17,6 @@ public class ArtistDTO {
 
     public ArtistDTO() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public ArtistDTO(long id, String name, List<Album> albums, Image image) {
@@ -61,11 +60,6 @@ public class ArtistDTO {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(albums, id, image, name);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -82,9 +76,5 @@ public class ArtistDTO {
 	public String toString() {
 		return "ArtistDTO [id=" + id + ", name=" + name + ", albums=" + albums + ", image=" + image + "]";
 	}
-
-    
-    
-    
 
 }

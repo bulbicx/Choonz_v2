@@ -68,10 +68,10 @@ public class Session {
 	
 	
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, token, user);
-	}
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(id, token, user);
+//	}
 
 	@Override
 	public boolean equals(Object obj) {

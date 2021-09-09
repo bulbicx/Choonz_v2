@@ -2,6 +2,7 @@ package com.qa.choonz.uat.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 public class HomePage {
 	
@@ -78,7 +79,6 @@ public class HomePage {
 	
 	@FindBy(className = "card-playlist-1")
 	private WebElement firstPlaylistCard;
-
 	
 	public void clickHeaderHomeBtn() {
 		headerHomeBtn.click();

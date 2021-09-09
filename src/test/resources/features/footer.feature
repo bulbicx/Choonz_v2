@@ -1,6 +1,7 @@
 @navpages
 Feature: Footer feature
-  I want to use this template for my feature file
+  As a user, I want to click on links positioned on the footer,
+  so that I am redirected to the respective pages.
 
   Scenario: Footer Home Link
     Given I am on the genres page

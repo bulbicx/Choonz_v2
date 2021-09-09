@@ -19,10 +19,7 @@ public class PlaylistDTO {
 
     public PlaylistDTO() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-
 
     public PlaylistDTO(long id, String name, String description, Image artwork, List<Track> tracks, PublicUser user) {
 		super();
@@ -33,8 +30,6 @@ public class PlaylistDTO {
 		this.tracks = tracks;
 		this.user = user;
 	}
-
-
 
 	/**
      * @return the id
@@ -91,7 +86,6 @@ public class PlaylistDTO {
 	}
 
 
-
 	/**
      * @return the tracks
      */
@@ -120,10 +114,6 @@ public class PlaylistDTO {
 				+ ", tracks=" + tracks + ", user=" + user + "]";
 	}
 
-    @Override
-	public int hashCode() {
-		return Objects.hash(artwork, description, id, name, tracks, user);
-	}
 
     @Override
 	public boolean equals(Object obj) {

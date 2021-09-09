@@ -39,8 +39,7 @@ import com.qa.choonz.persistence.domain.builder.AlbumBuilder;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Sql(scripts = { "classpath:sql-schema.sql",
-		"classpath:sql-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:sql-schema.sql", "classpath:sql-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 public class AlbumControllerIntegrationTest {
 
 	@Autowired

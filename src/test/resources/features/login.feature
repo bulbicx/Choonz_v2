@@ -1,4 +1,4 @@
-@navpages
+@login
 Feature: Login pages
   I want to use this template for my feature file
 

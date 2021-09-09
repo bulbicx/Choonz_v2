@@ -87,10 +87,6 @@ public class TrackDTO {
         return builder.toString();
     }
 
-    @Override
-	public int hashCode() {
-		return Objects.hash(album, duration, id, lyrics, name, playlist);
-	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
