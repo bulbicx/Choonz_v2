@@ -3,7 +3,6 @@ package com.qa.choonz.uat.stepdefs;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,8 +32,6 @@ public class AlbumStepDefs {
 		screenshotUtils = new ScreenshotUtility();
 		this.albumsPage = PageFactory.initElements(driver, AlbumsPage.class);
 		this.singlePage = PageFactory.initElements(driver, AlbumSinglePage.class);
-		this.driver.manage().window().maximize();
-		this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 	
 	@Given("I am on the albums page")

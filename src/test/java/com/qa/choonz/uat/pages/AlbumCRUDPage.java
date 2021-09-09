@@ -1,5 +1,8 @@
 package com.qa.choonz.uat.pages;
 
+import java.util.concurrent.TimeUnit;
+
+import org.awaitility.Awaitility;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -100,7 +103,13 @@ public class AlbumCRUDPage {
 		this.newArtistDropdown = new Select(artistListAdd);
 		newNameField.sendKeys(name);
 		newCoverField.sendKeys(cover);
+		Awaitility.await()
+		.atMost(5, TimeUnit.SECONDS)
+		.until(() -> newGenreDropdown.getOptions().size() > 0);
 		newGenreDropdown.selectByVisibleText(genre);
+		Awaitility.await()
+		.atMost(5, TimeUnit.SECONDS)
+		.until(() -> newArtistDropdown.getOptions().size() > 0);
 		newArtistDropdown.selectByVisibleText(artist);
 		this.addBtn.click();
 	}
